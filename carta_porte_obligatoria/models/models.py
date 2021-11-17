@@ -15,6 +15,10 @@ class TmsResPartners(models.Model):
 
     @api.onchange('waybill_ids')
     def action_progress_cron(self):
+        if self.waybill_ids:
+            self.bool = True
+        else:
+            raise ValidationError("Debe llenar las lineas de Carta Porte")
         for rec in self:
             rec.validate_driver_license()
             rec.validate_vehicle_insurance()
@@ -27,7 +31,3 @@ class TmsResPartners(models.Model):
                     _('The unit or driver are already in use!'))
             rec.state = "progress"
             rec.date_start_real = fields.Datetime.now()
-            if self.waybill_ids:
-                self.bool = True
-            else:
-                raise ValidationError("Debe llenar las lineas de Carta Porte")
