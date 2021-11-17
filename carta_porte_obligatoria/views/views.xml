@@ -1,0 +1,21 @@
+
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="tms_travel_form">
+      <field name="name">tms.travel.form</field>
+      <field name="model">tms.travel</field>
+      <field name="inherit_id" ref="tms.view_tms_travel_form"/>
+      <field name="arch" type="xml">
+       	<xpath expr="//button[@name='action_progress']" position="replace">
+          <button name="action_progress_cron" icon="fa-thumbs-up" type="object"
+                  string="Dispatch" states="draft" groups="tms.group_traffic,tms.group_expenses"
+                  class="oe_highlight"/>
+        </xpath>
+      </field>
+    </record>
+<!--tms.view_tms_travel_form,  tms.travel-->
+
+  </data>
+</odoo>
